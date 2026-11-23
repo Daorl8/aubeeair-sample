@@ -30,7 +30,7 @@
     { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "10:00", "closes": "20:00" },
     { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "19:00" }
   ],
-  "sameAs": ["https://www.instagram.com/aubeeair/", "https://m.place.naver.com/place/1795726923/home", "http://pf.kakao.com/_Jugyxj"]
+  "sameAs": ["https://www.instagram.com/aubeeair/", "https://m.place.naver.com/place/1795726923/home", "https://pf.kakao.com/_Jugyxj"]
 }
 </script>
 <style>
@@ -193,7 +193,7 @@ h2 small{ display:block; font-family:var(--sans); font-size:.95rem; font-weight:
     <nav class="nav" aria-label="섹션">
       <a href="#about">About</a><a href="#works">Works</a><a href="#price">Price</a><a href="#booking">Booking</a><a href="#visit">Visit</a>
     </nav>
-    <a class="head-cta" href="http://pf.kakao.com/_Jugyxj" target="_blank" rel="noopener">카카오 채널 예약</a>
+    <a class="head-cta" href="https://pf.kakao.com/_Jugyxj" target="_blank" rel="noopener">카카오 채널 예약</a>
   </div>
   <nav class="snav" aria-label="섹션 바로가기">
     <a href="#about">About</a><a href="#works">Works</a><a href="#price">Price</a><a href="#booking">Booking</a><a href="#visit">Visit</a>
@@ -215,7 +215,7 @@ h2 small{ display:block; font-family:var(--sans); font-size:.95rem; font-weight:
         <h1 id="hero-h">천안 속눈썹전문 <span class="nw">오브에르</span></h1>
         <p class="sub">100% 예약제 | 1:1 맞춤시술</p>
         <div class="btns">
-          <a class="btn fill" href="http://pf.kakao.com/_Jugyxj" target="_blank" rel="noopener">카카오 채널 예약</a>
+          <a class="btn fill" href="https://pf.kakao.com/_Jugyxj" target="_blank" rel="noopener">카카오 채널 예약</a>
           <a class="btn tel" href="tel:01084244792">전화 <span class="nw">010-8424-4792</span></a>
           <a class="btn" href="#price">가격 보기</a>
         </div>
@@ -290,7 +290,7 @@ h2 small{ display:block; font-family:var(--sans); font-size:.95rem; font-weight:
         </ul>
         <p class="note reveal">*30분 단위 예약은 카카오채널로 <span class="nw">문의 부탁드립니다:)</span></p>
         <div class="btns reveal">
-          <a class="btn fill" href="http://pf.kakao.com/_Jugyxj" target="_blank" rel="noopener">카카오 채널 예약</a>
+          <a class="btn fill" href="https://pf.kakao.com/_Jugyxj" target="_blank" rel="noopener">카카오 채널 예약</a>
           <a class="btn" href="https://m.place.naver.com/place/1795726923/home" target="_blank" rel="noopener">네이버 플레이스</a>
           <a class="btn" href="https://www.instagram.com/aubeeair/" target="_blank" rel="noopener">인스타그램</a>
         </div>
@@ -334,7 +334,7 @@ h2 small{ display:block; font-family:var(--sans); font-size:.95rem; font-weight:
     <p class="brand" aria-hidden="true">AUB</p>
     <p>오브에르 · 충남 천안시 서북구 <span class="nw">쌍용17길 25</span> <span class="nw">상가동 2층</span><br /><span class="nw">월 – 금 10:00 – 20:00</span> · <span class="nw">토 10:00 – 19:00</span> · <span class="nw">일 정기휴무</span></p>
     <div class="links">
-      <a href="http://pf.kakao.com/_Jugyxj" target="_blank" rel="noopener">카카오 채널</a>
+      <a href="https://pf.kakao.com/_Jugyxj" target="_blank" rel="noopener">카카오 채널</a>
       <a href="tel:01084244792">010-8424-4792</a>
       <a href="https://www.instagram.com/aubeeair/" target="_blank" rel="noopener">인스타그램</a>
       <a href="https://m.place.naver.com/place/1795726923/home" target="_blank" rel="noopener">네이버 플레이스</a>
@@ -344,7 +344,7 @@ h2 small{ display:block; font-family:var(--sans); font-size:.95rem; font-weight:
 </footer>
 
 <nav class="quick" aria-label="빠른 연결">
-  <a class="fill" href="http://pf.kakao.com/_Jugyxj" target="_blank" rel="noopener">카카오 예약</a>
+  <a class="fill" href="https://pf.kakao.com/_Jugyxj" target="_blank" rel="noopener">카카오 예약</a>
   <a href="tel:01084244792">전화</a>
   <a href="https://www.instagram.com/aubeeair/" target="_blank" rel="noopener">인스타</a>
 </nav>
@@ -391,7 +391,10 @@ h2 small{ display:block; font-family:var(--sans); font-size:.95rem; font-weight:
   });
   /* 물빛 무늬 흐름 */
   var pan=document.querySelector('.hero .panel');
-  if(pan){ var t0=Date.now(); setInterval(function(){ var t=(Date.now()-t0)/1000;
+  if(pan){ var t0=Date.now(), vis=true;
+    /* 히어로가 화면 밖이면 무늬 갱신을 쉼(코드 검토 2026-11-23) */
+    if('IntersectionObserver' in window){ new IntersectionObserver(function(es){ vis=es[0].isIntersecting; }).observe(pan); }
+    setInterval(function(){ if(!vis) return; var t=(Date.now()-t0)/1000;
     pan.style.setProperty('--w1', (t*9).toFixed(1)+'px '+(t*5+Math.sin(t*.4)*14).toFixed(1)+'px');
     pan.style.setProperty('--w2', (-t*6+Math.sin(t*.3)*20).toFixed(1)+'px '+(-t*8).toFixed(1)+'px'); },50); }
   if(document.fonts && document.fonts.ready){ document.fonts.ready.then(go); }
